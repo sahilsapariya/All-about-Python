@@ -8,6 +8,10 @@
         &   0 0 0 0 1   == 1
         -------------
             0 0 0 0 0   == even     else odd
+
+    Though first method i.e. using Modulo operator 
+    will be more efficient
+    
 """
 
 def evenOddAnd(num):

@@ -24,7 +24,7 @@ class Graph:
                     queue.append(i)
                     visited[i] = True
 
-    
+
 if __name__ == "__main__":
     g = Graph()
     g.addEdge(0, 1)

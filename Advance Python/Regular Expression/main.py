@@ -82,3 +82,21 @@ print(pattern.search("mail.mymail@gmail.com"))        # valid
 print(pattern.search("my_mail.e-mail@yahoo.com"))     # valid
 print(pattern.search("my_mail.e-mail@yahoo.travel"))  # Not valid because .travel 
                                                       # does not fit to 2 to 3 letters
+
+
+# Write a code for checking the indian phone numbers.
+
+my_text = """
+This is a indian phone number: +91 7894631232
+This is another number: +91 1593574658
+"""
+pattern = re.compile(r'\+91\s\d{10}\b')
+matches = pattern.finditer(my_text)
+
+for item in matches:
+  span = item.span()
+  print(my_text[span[0]:span[1]])
+
+# output:
+# +91 7894631232
+# +91 1593574658

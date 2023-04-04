@@ -261,7 +261,104 @@ has no special meaning, so <code class="w3-codespan">[+]</code> means: return a 
   </tr>
 </tbody></table>
 
-
+---
 # Examples with code snipates
 
-see the main.py file.
+## The <code>search()</code> function
+
+The search() function searches the string for a match, and returns a Match object if there is a match.
+
+If there is more than one match, only the first occurrence of the match will be returned:
+
+#### Example
+
+```python
+# search for the first white space character in the string
+import re
+
+txt = "The rain in Spain"
+x = re.search("\s", txt)
+
+print("The first white-space character is located in position:", x.start())
+```
+
+<b>Output:</b>
+```
+The first white-space character is located in position: 3
+```
+
+If no matches are found then it returns <code>None</code>
+
+---
+## The <code>split()</code> function
+
+The split() function returns a list where the string has been split at each match:
+
+```python
+import re
+
+#Split the string at every white-space character:
+txt = "The rain in Spain"
+x = re.split(r"", txt)
+print(x)
+
+#Split the string at every upperletter character:
+x = re.split(r"[A-Z]", txt)
+print(x)
+```
+<b>Output:</b>
+```
+['The', 'rain', 'in', 'Spain']
+['', 'he rain in ', 'pain']
+```
+You can control the number of occurrences by specifying the <code>maxsplit</code> parameter:
+
+```python
+import re
+
+txt = "The rain in Spain"
+x = re.split("\s", txt, 1)
+print(x)
+```
+<b>Output:</b>
+```
+['The', 'rain in Spain']
+```
+---
+
+
+## The <code>finditer()</code> function
+
+It will return all the possible matches in iterator form. This function is the better than other RegEx functions. It gives more information about matched object.
+```
+# About the method.
+
+(method) def finditer(
+    string: str,
+    pos: int = 0,
+    endpos: int = sys.maxsize
+) -> Iterator[Match[bytes]]
+```
+
+#### Example
+Create program that find the indian phone number from text given.
+```python
+import re
+
+my_text = """
+This is a indian phone number: +91 7894631232
+This is another number: +91 1593574658
+"""
+pattern = re.compile(r'\+91\s\d{10}\b')
+matches = pattern.finditer(my_text)
+
+for item in matches:
+  span = item.span()
+  print(my_text[span[0]:span[1]])
+```
+
+<b>Output:</b>
+```
++91 7894631232
++91 1593574658
+```

@@ -149,15 +149,6 @@ def Contact():
 app.run(debug=True)
 ```
 
-After doing till here you can see our website like this:
-
-**Home Page**
-
-![Home-page](./images/Home%20page.PNG)
-
-**Contact Page**
-
-![Contact-page](./images/Contact%20page.PNG)
 
 I hope you like it, See you in next tutorial. 
 

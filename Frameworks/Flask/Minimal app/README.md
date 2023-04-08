@@ -1,5 +1,7 @@
 # Getting Started With Flask
 
+Auther : [Sahil Sapariya](https://github.com/sahilsapariya)
+
 ## Minimal App 
 Let's begin our python web journy with Flask.
 
@@ -151,11 +153,11 @@ After doing till here you can see our website like this:
 
 **Home Page**
 
-![Home-page](./images/Home page.png)
+![Home-page](./images/Home%20page.PNG)
 
 **Contact Page**
 
-![Contact-page](./images/Contact page.PNG)
+![Contact-page](./images/Contact%20page.PNG)
 
 I hope you like it, See you in next tutorial. 
 

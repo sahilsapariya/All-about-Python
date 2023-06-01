@@ -4,4 +4,4 @@ I have learning python but didn't implement it well so I'm starting from very ba
 
 ## List of projects
 
-- [Random Password Strength Checker](#10-mini-projects-using-python)
+- [Random Password Strength Checker](https://github.com/sahilsapariya/All-about-Python/tree/main/10%20mini%20projects/Random%20Password%20Strength%20Checker)

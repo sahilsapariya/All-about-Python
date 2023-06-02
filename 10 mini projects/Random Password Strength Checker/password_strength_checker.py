@@ -1,3 +1,5 @@
+from getpass import getpass
+
 class Password():
     def __init__(self, password) -> None:
         self.score = 0
@@ -82,7 +84,7 @@ class Password():
             
 
 if __name__ == "__main__":
-    password = input("Enter password : ")
+    password = getpass("Enter password : ")
     obj = Password(password)
 
     print("Password Score : ", obj.get_score())

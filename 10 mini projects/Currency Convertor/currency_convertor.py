@@ -1,21 +1,20 @@
-API_KEY = 'AFRbT5nRxPgQqZC6N47mT8omKJcmiAZk3sJ0Okpr'
-
-
 import requests
-from requests.structures import CaseInsensitiveDict
+from bs4 import BeautifulSoup
 
-url = f"https://api.currencyapi.com/v3/latest?apikey={API_KEY}"
+def get_data(amount: int, _from: str, _to: str):
+    html_text = requests.get(f"in.investing.com/{_from}-{_to}").text
+    soup = BeautifulSoup(html_text, "lxml")
 
-headers = CaseInsensitiveDict()
-headers["apikey"] = API_KEY
+    price_tag = soup.find('bdo', _class="last-price-value js-streamable-element").text
 
-resp = requests.get(url, headers=headers)
+    res = price_tag * amount
+    return res
 
-data = resp.json()
+if __name__ == "__main__":
+    _from = input("Enter currency name from : ")
+    _to = input("Enter currency name to : ")
+    amount = int(input("Enter amount to be convert : "))
 
-for currency in data["data"].values():
-    print(currency["code"])
-    print(currency["value"])
-    print()
+    res = get_data(amount, _from, _to)
 
-# print(resp.json())
+    print(res)

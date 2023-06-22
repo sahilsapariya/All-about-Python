@@ -7,7 +7,8 @@ urlpatterns = [
     # path('update_student/<int:id>/', update_student),
     # path('get_student/<int:id>/', get_student),
     # path('delete_student/<int:id>/', delete_student),
-    # path('get_books/', get_book)
 
-    path('student/', StudentAPI.as_view())
+    path('get_books/', get_book),
+    path('student/', StudentAPI.as_view()),
+    path('register/', RegisterUser.as_view())
 ]

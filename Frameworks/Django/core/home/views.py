@@ -1,16 +1,22 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.authtoken.models import Token
+
 
 from .models import *
 from .serializers import *
 
-# Create your views here.
+# Authentication imports
+from rest_framework.permissions import IsAuthenticated
+# from rest_framework.authentication import TokenAuthentication
+# from rest_framework.authtoken.models import Token
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_book(request):
     book_objs = Book.objects.all()
     serializer = BookSerializer(book_objs, many=True)
@@ -27,20 +33,19 @@ class RegisterUser(APIView):
         serializer.save()
 
         user = User.objects.get(username=serializer.data['username'])
-        token_obj, _ = Token.objects.get_or_create(user=user)
+        # token_obj, _ = Token.objects.get_or_create(user=user)
+        refresh = RefreshToken.for_user(user)
 
-
-
-        return Response({"status": 200, "message": "Student updated", 'token': str(token_obj), "payload": serializer.data})
-
-
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+        return Response({"status": 200, 
+                         "message": "Student added", 
+                         'refresh': str(refresh),
+                         'access': str(refresh.access_token), 
+                         "payload": serializer.data})
 
 
 class StudentAPI(APIView):
 
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
 

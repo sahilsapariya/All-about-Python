@@ -1,20 +1,39 @@
+
+# Third party app for real time currency rates
+
+# Alpha Vantage
+# https://www.alphavantage.co
+
+
+# List of currency code of all the countries 
+# https://www.iban.com/currency-codes
+
+
 import requests
-from bs4 import BeautifulSoup
 
-def get_data(amount: int, _from: str, _to: str):
-    html_text = requests.get(f"in.investing.com/{_from}-{_to}").text
-    soup = BeautifulSoup(html_text, "lxml")
+with open('10 mini projects\\Currency Convertor\\api.txt', 'r') as f:
+    api_key = f.read()
 
-    price_tag = soup.find('bdo', _class="last-price-value js-streamable-element").text
+def convert_curr(from_c, to_c, amount):
+    base_url = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE"
+    main_url = f"{base_url}&from_currency={from_c}&to_currency={to_c}&apikey={api_key}"
+    response = requests.get(main_url)
+    result = response.json()
+    key = result['Realtime Currency Exchange Rate']
+    rate = key['5. Exchange Rate']
 
-    res = price_tag * amount
-    return res
+    return float(rate) * amount
+
 
 if __name__ == "__main__":
-    _from = input("Enter currency name from : ")
-    _to = input("Enter currency name to : ")
-    amount = int(input("Enter amount to be convert : "))
+    print("\t\tCURRENCY CONVERTOR\n\n")
+    while True:
+        from_c = input("Enter currency code of currency to be converted : ").upper()
+        to_c = input("Enter currency code of currency to convert : ").upper()
+        amount = int(input("Enter amount : "))
 
-    res = get_data(amount, _from, _to)
+        result = convert_curr(from_c, to_c, amount)
+        print(f"{amount} {from_c} : {result} {to_c}")
 
-    print(res)
+        is_continue = input("Wanted to continue? (y/n) : ").lower()
+        if is_continue == 'n': exit(0)

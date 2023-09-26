@@ -68,7 +68,7 @@ class StudentAPI(APIView):
     def put(self, request):
         pass
 
-    def patch(self, request):
+    def patch(self, request, id):
         try:
             student_obj = Student.objects.get(id=id)
             serializer = StudentSerializer(student_obj, data=request.data, partial=True)
@@ -86,7 +86,7 @@ class StudentAPI(APIView):
             return Response({'status': 500, 'message': 'Internal server error', 'error': str(e)})
 
 
-    def delete(self, request):
+    def delete(self, request, id):
         try: 
             student_obj = Student.objects.get(id=id)
             student_obj.delete()

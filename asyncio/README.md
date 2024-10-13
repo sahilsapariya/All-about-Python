@@ -21,4 +21,21 @@ __Details:__
 - Use asyncio.gather to handle multiple requests at once.
 - Parse and format the results neatly.
 
+### Task 3. Writing to a File Task
+
+__Task:__  Write the parsed API response data to a local file asynchronously.
+
+__Details:__
+
+- Save the extracted fields into a CSV or JSON file.
+- Handle file operations asynchronously using aiofiles library.
+
+<br>
+
+# Solution for Task 1 and Task 2
+
+[See solution for task1 and task2](/asyncio/task1/main.py)
+
+[See solution for task3](/asyncio/task3/main.py)
+
 
